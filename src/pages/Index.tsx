@@ -98,73 +98,93 @@ const Index = () => {
       <section id="education" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Курсы обучения</h2>
+            <h2 className="text-4xl font-bold mb-4">Основы защиты</h2>
             <p className="text-xl text-muted-foreground">
-              Пошаговые программы для изучения основ кибербезопасности
+              Простые и понятные советы по кибербезопасности
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
               {
                 icon: 'Key',
-                title: 'Основы паролей',
-                duration: '30 мин',
-                level: 'Начальный',
-                desc: 'Создание надежных паролей и управление ими'
+                title: 'Надежные пароли',
+                tips: [
+                  'Минимум 12 символов: буквы, цифры, спецсимволы',
+                  'Уникальный пароль для каждого сервиса',
+                  'Используйте менеджер паролей',
+                  'Включайте двухфакторную аутентификацию'
+                ]
               },
               {
                 icon: 'Mail',
-                title: 'Безопасность email',
-                duration: '45 мин',
-                level: 'Начальный',
-                desc: 'Защита от фишинга и спама'
+                title: 'Защита от фишинга',
+                tips: [
+                  'Проверяйте адрес отправителя письма',
+                  'Не открывайте подозрительные вложения',
+                  'Не переходите по сомнительным ссылкам',
+                  'Банки никогда не запрашивают пароли по почте'
+                ]
               },
               {
                 icon: 'Wifi',
-                title: 'Безопасный интернет',
-                duration: '1 час',
-                level: 'Средний',
-                desc: 'Безопасный серфинг и защита в сети'
+                title: 'Безопасность сети',
+                tips: [
+                  'Измените стандартный пароль роутера',
+                  'Используйте шифрование WPA3 или WPA2',
+                  'Не доверяйте публичным Wi-Fi сетям',
+                  'Используйте VPN в общественных местах'
+                ]
               },
               {
                 icon: 'Smartphone',
-                title: 'Мобильная безопасность',
-                duration: '40 мин',
-                level: 'Начальный',
-                desc: 'Защита смартфона и личных данных'
+                title: 'Защита устройств',
+                tips: [
+                  'Устанавливайте обновления сразу',
+                  'Ставьте приложения только из официальных магазинов',
+                  'Блокируйте экран паролем или биометрией',
+                  'Регулярно делайте резервные копии данных'
+                ]
               },
               {
-                icon: 'Cloud',
-                title: 'Облачные сервисы',
-                duration: '50 мин',
-                level: 'Средний',
-                desc: 'Безопасное использование облака'
+                icon: 'Eye',
+                title: 'Конфиденциальность',
+                tips: [
+                  'Ограничьте доступ к личной информации в соцсетях',
+                  'Не делитесь паролями и личными данными',
+                  'Проверяйте разрешения приложений',
+                  'Используйте приватный режим для чувствительных операций'
+                ]
               },
               {
-                icon: 'Database',
-                title: 'Резервное копирование',
-                duration: '35 мин',
-                level: 'Начальный',
-                desc: 'Сохранность важных данных'
+                icon: 'AlertTriangle',
+                title: 'Что делать при взломе',
+                tips: [
+                  'Немедленно смените все пароли',
+                  'Проверьте активные сеансы в аккаунтах',
+                  'Свяжитесь с банком, если были платежные данные',
+                  'Включите мониторинг подозрительной активности'
+                ]
               }
-            ].map((course, idx) => (
-              <Card key={idx} className="border-border hover:border-primary transition-all duration-300 hover:scale-105 cursor-pointer">
+            ].map((item, idx) => (
+              <Card key={idx} className="border-border hover:border-primary transition-all duration-300">
                 <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <Icon name={course.icon as any} size={32} className="text-primary" />
-                    <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">
-                      {course.level}
-                    </span>
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-3 bg-primary/20 rounded-lg">
+                      <Icon name={item.icon as any} size={32} className="text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl">{item.title}</CardTitle>
                   </div>
-                  <CardTitle>{course.title}</CardTitle>
-                  <CardDescription>{course.desc}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Icon name="Clock" size={16} />
-                    <span>{course.duration}</span>
-                  </div>
+                  <ul className="space-y-3">
+                    {item.tips.map((tip, tipIdx) => (
+                      <li key={tipIdx} className="flex items-start gap-3">
+                        <Icon name="Check" size={20} className="text-primary mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{tip}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
             ))}
